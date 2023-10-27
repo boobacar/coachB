@@ -31,7 +31,7 @@ const Bodyparts = ({ apiUrl, setApiUrl }) => {
       setLoading(false);
       // localStorage.setItem("bodyparts", JSON.stringify(result));
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setError(error);
       setLoading(false);
     }

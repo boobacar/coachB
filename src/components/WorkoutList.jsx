@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import ReactPaginate from "react-paginate";
-import WorkoutCard from "./WorkoutCard";
-import "./pagination.css";
+import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
+import WorkoutCard from './WorkoutCard';
+import './pagination.css';
 
 const WorkoutList = ({ input, data, setData, apiUrl, SetApiUrl }) => {
   const [loading, setLoading] = useState(true);
@@ -25,24 +25,24 @@ const WorkoutList = ({ input, data, setData, apiUrl, SetApiUrl }) => {
     // } else {
     const url = `https://exercisedb.p.rapidapi.com/exercises${apiUrl}`;
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "X-RapidAPI-Key": "576b964097msh5dc0dba764788a6p11a705jsn323787f267b6",
-        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        'X-RapidAPI-Key': '576b964097msh5dc0dba764788a6p11a705jsn323787f267b6',
+        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
       },
     };
 
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const result = await response.json();
       setData(result);
       setLoading(false);
       // localStorage.setItem("data", JSON.stringify(result));
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setError(error);
       setLoading(false);
     }
@@ -71,16 +71,16 @@ const WorkoutList = ({ input, data, setData, apiUrl, SetApiUrl }) => {
       </div>
 
       <ReactPaginate
-        previousLabel={"<"}
-        nextLabel={">"}
-        breakLabel={"..."}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
         pageCount={pageCount}
         marginPagesDisplayed={2}
         pageRangeDisplayed={2}
         onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
+        containerClassName={'pagination'}
+        subContainerClassName={'pages pagination'}
+        activeClassName={'active'}
       />
     </>
   );
