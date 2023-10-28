@@ -42,7 +42,7 @@ const WorkoutList = ({ input, data, setData, apiUrl, SetApiUrl }) => {
       setLoading(false);
       // localStorage.setItem("data", JSON.stringify(result));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError(error);
       setLoading(false);
     }

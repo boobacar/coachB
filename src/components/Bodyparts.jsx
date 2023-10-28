@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Bodyparts = ({ apiUrl, setApiUrl }) => {
-  const [bodyparts, setBodyparts] = useState();
+  const [bodyparts, setBodyparts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -31,7 +31,7 @@ const Bodyparts = ({ apiUrl, setApiUrl }) => {
       setLoading(false);
       // localStorage.setItem("bodyparts", JSON.stringify(result));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError(error);
       setLoading(false);
     }
