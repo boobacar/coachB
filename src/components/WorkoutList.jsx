@@ -19,34 +19,35 @@ const WorkoutList = ({ input, data, setData, apiUrl, SetApiUrl }) => {
   };
 
   const fetchData = async () => {
-    // const check = localStorage.getItem("data");
-    // if (check) {
-    // setData(JSON.parse(check));
-    // } else {
-    const url = `https://exercisedb.p.rapidapi.com/exercises${apiUrl}`;
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '576b964097msh5dc0dba764788a6p11a705jsn323787f267b6',
-        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-      },
-    };
+    const check = localStorage.getItem('data');
+    if (check) {
+      setData(JSON.parse(check));
+    } else {
+      const url = `https://exercisedb.p.rapidapi.com/exercises${apiUrl}`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key':
+            '576b964097msh5dc0dba764788a6p11a705jsn323787f267b6',
+          'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+        },
+      };
 
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const result = await response.json();
+        setData(result);
+        setLoading(false);
+        localStorage.setItem('data', JSON.stringify(result));
+      } catch (error) {
+        console.error(error);
+        setError(error);
+        setLoading(false);
       }
-      const result = await response.json();
-      setData(result);
-      setLoading(false);
-      // localStorage.setItem("data", JSON.stringify(result));
-    } catch (error) {
-      console.error(error);
-      setError(error);
-      setLoading(false);
     }
-    // }
   };
 
   useEffect(() => {

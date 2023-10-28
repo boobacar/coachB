@@ -6,36 +6,37 @@ const Bodyparts = ({ apiUrl, setApiUrl }) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
-    // const check = localStorage.getItem("bodyparts");
-    // if (check) {
-    // setBodyparts(JSON.parse(check));
-    // } else {
-    const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPartList`;
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '576b964097msh5dc0dba764788a6p11a705jsn323787f267b6',
-        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-      },
-    };
+    const check = localStorage.getItem('bodyparts');
+    if (check) {
+      setBodyparts(JSON.parse(check));
+    } else {
+      const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPartList`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key':
+            '576b964097msh5dc0dba764788a6p11a705jsn323787f267b6',
+          'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
+        },
+      };
 
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const result = await response.json();
+        setBodyparts(result);
+        // console.log(result);
+        // console.log(category);
+        setLoading(false);
+        localStorage.setItem('bodyparts', JSON.stringify(result));
+      } catch (error) {
+        console.error(error);
+        setError(error);
+        setLoading(false);
       }
-      const result = await response.json();
-      setBodyparts(result);
-      // console.log(result);
-      // console.log(category);
-      setLoading(false);
-      // localStorage.setItem("bodyparts", JSON.stringify(result));
-    } catch (error) {
-      console.error(error);
-      setError(error);
-      setLoading(false);
     }
-    // }
   };
 
   useEffect(() => {
